@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://b4h3f742asjhr"]
+
+[ext_resource type="Script" uid="uid://dmiukpj58lule" path="res://objects/proto_player.gd" id="1_xrldh"]
+[ext_resource type="Texture2D" uid="uid://cbishq2k8hv40" path="res://assets/PNG/Orange/texture_05.png" id="2_bbp5c"]
+[ext_resource type="Script" uid="uid://c650ta74abr4f" path="res://scripts/label_username.gd" id="3_4npoy"]
+[ext_resource type="Texture2D" uid="uid://cum516oya6eje" path="res://assets/PNG/Green/texture_01.png" id="3_cdui0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2rq21"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o7doa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdui0"]
+albedo_texture = ExtResource("2_bbp5c")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xrldh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4npoy"]
+albedo_texture = ExtResource("3_cdui0")
+
+[sub_resource type="SphereMesh" id="SphereMesh_bbp5c"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Gradient" id="Gradient_cdui0"]
+offsets = PackedFloat32Array(0, 0.09638554)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4npoy"]
+gradient = SubResource("Gradient_cdui0")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xrldh"]
+properties/0/path = NodePath("MeshInstance3D/LabelUsername:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("MeshInstance3D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:sync_velocity")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:username")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[node name="ProtoPlayer" type="CharacterBody3D" unique_id=1917410402 groups=["Player"]]
+collision_mask = 14
+script = ExtResource("1_xrldh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=895760261]
+shape = SubResource("CapsuleShape3D_2rq21")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=292323815]
+mesh = SubResource("CapsuleMesh_o7doa")
+surface_material_override/0 = SubResource("StandardMaterial3D_cdui0")
+
+[node name="Nose" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1097664587]
+transform = Transform3D(0.36230913, 0, 0, 0, -2.0011399e-08, 0.36230913, 0, -0.45780742, -1.5837035e-08, 0, 0.49520028, -0.3770429)
+mesh = SubResource("CylinderMesh_xrldh")
+surface_material_override/0 = SubResource("StandardMaterial3D_cdui0")
+
+[node name="Marker3D" type="Marker3D" parent="MeshInstance3D/Nose" unique_id=1978494245]
+transform = Transform3D(2.7600741, 0, 0, 0, 2.7600744, 7.1054274e-15, 0, 0, 2.1843247, 0, 1.0418292, 1.1920929e-07)
+
+[node name="CameraAnchor" type="Node3D" parent="MeshInstance3D" unique_id=798391793]
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D/CameraAnchor" unique_id=1183848794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7255756, 3.8098023)
+
+[node name="RayCastAim" type="RayCast3D" parent="MeshInstance3D/CameraAnchor/Camera3D" unique_id=589900032]
+target_position = Vector3(0, 0, -100)
+collision_mask = 7
+
+[node name="LabelUsername" type="Label3D" parent="MeshInstance3D" unique_id=1186544291 node_paths=PackedStringArray("sibling_camera")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.4784541, 0)
+text = "username"
+font_size = 48
+script = ExtResource("3_4npoy")
+sibling_camera = NodePath("../CameraAnchor/Camera3D")
+
+[node name="PauseMenu" type="Control" parent="." unique_id=136354896]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="PauseMenu" unique_id=1339611367]
+layout_mode = 1
+offset_right = 288.0
+offset_bottom = 154.0
+mouse_filter = 2
+
+[node name="ButtonLeave" type="Button" parent="PauseMenu/Panel" unique_id=701876105]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -64.0
+offset_right = 125.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Leave"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel" unique_id=1419535628]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleMargin" type="MarginContainer" parent="PauseMenu/Panel/VBoxContainer" unique_id=1336884124]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+
+[node name="TitleSessionID" type="Label" parent="PauseMenu/Panel/VBoxContainer/TitleMargin" unique_id=914003983]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Session ID"
+
+[node name="CopyContainer" type="MarginContainer" parent="PauseMenu/Panel/VBoxContainer" unique_id=612276247]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/Panel/VBoxContainer/CopyContainer" unique_id=266854030]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LabelSessionID" type="Label" parent="PauseMenu/Panel/VBoxContainer/CopyContainer/HBoxContainer" unique_id=1896245021]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "ABC"
+
+[node name="ButtonCopyID" type="Button" parent="PauseMenu/Panel/VBoxContainer/CopyContainer/HBoxContainer" unique_id=949782904]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Panel/VBoxContainer/CopyContainer/HBoxContainer/ButtonCopyID" unique_id=327103271]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Copy"
+horizontal_alignment = 1
+
+[node name="BallMole" type="MeshInstance3D" parent="." unique_id=1775503759]
+visible = false
+material_override = SubResource("StandardMaterial3D_4npoy")
+mesh = SubResource("SphereMesh_bbp5c")
+
+[node name="AimUI" type="Control" parent="." unique_id=597623788]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="AimUI" unique_id=1083881647]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_4npoy")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1162908863]
+replication_config = SubResource("SceneReplicationConfig_xrldh")

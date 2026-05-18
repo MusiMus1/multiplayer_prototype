@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://dwxumi3xmo7nu"]
+
+[ext_resource type="Texture2D" uid="uid://c6bmfremnos7t" path="res://assets/PNG/Light/texture_07.png" id="1_wjoj8"]
+[ext_resource type="Texture2D" uid="uid://bgoqfs64cyh7m" path="res://assets/PNG/Red/texture_08.png" id="2_bdp8l"]
+[ext_resource type="Texture2D" uid="uid://cw2p64frt1csq" path="res://assets/PNG/Dark/texture_08.png" id="3_jj0au"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy0bs"]
+albedo_texture = ExtResource("1_wjoj8")
+uv1_scale = Vector3(3, 3, 3)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sgp6g"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_o5qli"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oa7qk"]
+albedo_texture = ExtResource("3_jj0au")
+
+[sub_resource type="BoxMesh" id="BoxMesh_bokwj"]
+size = Vector3(60, 10, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_avgj4"]
+size = Vector3(60, 10, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emumq"]
+albedo_texture = ExtResource("2_bdp8l")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5irk3"]
+height = 16.563
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wj2hs"]
+height = 16.563
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wjoj8"]
+sky_top_color = Color(0.2183147, 0.6710316, 0.906333, 1)
+sky_horizon_color = Color(0.6780563, 0.8718049, 0.9037761, 1)
+
+[sub_resource type="Sky" id="Sky_bdp8l"]
+sky_material = SubResource("ProceduralSkyMaterial_wjoj8")
+
+[sub_resource type="Environment" id="Environment_dfgan"]
+background_mode = 2
+sky = SubResource("Sky_bdp8l")
+ambient_light_source = 2
+ambient_light_color = Color(0.4096024, 0.50963056, 0.540147, 1)
+
+[node name="MainWorld" type="Node3D" unique_id=104521815]
+
+[node name="WorldMesh" type="Node3D" parent="." unique_id=507514077]
+
+[node name="Ground" type="MeshInstance3D" parent="WorldMesh" unique_id=1479192350]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_wy0bs")
+mesh = SubResource("PlaneMesh_sgp6g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WorldMesh/Ground" unique_id=1183303802]
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Ground/StaticBody3D" unique_id=521283708]
+shape = SubResource("ConcavePolygonShape3D_o5qli")
+
+[node name="Wall" type="StaticBody3D" parent="WorldMesh" unique_id=1051788908]
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Wall" unique_id=1316007137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16, 30.243)
+material_override = SubResource("StandardMaterial3D_oa7qk")
+mesh = SubResource("BoxMesh_bokwj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Wall" unique_id=486460107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16, 30.243)
+shape = SubResource("BoxShape3D_avgj4")
+
+[node name="Wall2" type="StaticBody3D" parent="WorldMesh" unique_id=1431637386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -59.957565)
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Wall2" unique_id=2143467307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16, 30.243)
+material_override = SubResource("StandardMaterial3D_oa7qk")
+mesh = SubResource("BoxMesh_bokwj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Wall2" unique_id=1549274574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16, 30.243)
+shape = SubResource("BoxShape3D_avgj4")
+
+[node name="Wall3" type="StaticBody3D" parent="WorldMesh" unique_id=1081947444]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 60, 0, 0.042434692)
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Wall3" unique_id=2109752785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16, 30.243)
+material_override = SubResource("StandardMaterial3D_oa7qk")
+mesh = SubResource("BoxMesh_bokwj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Wall3" unique_id=385079467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16, 30.243)
+shape = SubResource("BoxShape3D_avgj4")
+
+[node name="Wall4" type="StaticBody3D" parent="WorldMesh" unique_id=175398803]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 0, 0.042434692)
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Wall4" unique_id=1747338245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16, 30.243)
+material_override = SubResource("StandardMaterial3D_oa7qk")
+mesh = SubResource("BoxMesh_bokwj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Wall4" unique_id=2110742683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.16, 30.243)
+shape = SubResource("BoxShape3D_avgj4")
+
+[node name="Pillar" type="StaticBody3D" parent="WorldMesh" unique_id=645230910]
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Pillar" unique_id=401301550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+material_override = SubResource("StandardMaterial3D_emumq")
+mesh = SubResource("CylinderMesh_5irk3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Pillar" unique_id=1872078941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+shape = SubResource("CylinderShape3D_wj2hs")
+
+[node name="Pillar2" type="StaticBody3D" parent="WorldMesh" unique_id=263060385]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.369575, -5.7917204, 0)
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Pillar2" unique_id=1040609164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+material_override = SubResource("StandardMaterial3D_emumq")
+mesh = SubResource("CylinderMesh_5irk3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Pillar2" unique_id=1738941942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+shape = SubResource("CylinderShape3D_wj2hs")
+
+[node name="Pillar3" type="StaticBody3D" parent="WorldMesh" unique_id=1593205618]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.442868, -12.015205, -11.754423)
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Pillar3" unique_id=2018423230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+material_override = SubResource("StandardMaterial3D_emumq")
+mesh = SubResource("CylinderMesh_5irk3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Pillar3" unique_id=1900889323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+shape = SubResource("CylinderShape3D_wj2hs")
+
+[node name="Pillar4" type="StaticBody3D" parent="WorldMesh" unique_id=1268877097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.199084, -12.015205, -16.885649)
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Pillar4" unique_id=2142567440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+material_override = SubResource("StandardMaterial3D_emumq")
+mesh = SubResource("CylinderMesh_5irk3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Pillar4" unique_id=1042311539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 6.864091, 0)
+shape = SubResource("CylinderShape3D_wj2hs")
+
+[node name="Pillar5" type="StaticBody3D" parent="WorldMesh" unique_id=2111152987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.199084, -7.253279, 21.322893)
+collision_layer = 4
+collision_mask = 9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldMesh/Pillar5" unique_id=1735462574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+material_override = SubResource("StandardMaterial3D_emumq")
+mesh = SubResource("CylinderMesh_5irk3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldMesh/Pillar5" unique_id=1125146696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6720934, 5.447858, 0)
+shape = SubResource("CylinderShape3D_wj2hs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1733975064]
+environment = SubResource("Environment_dfgan")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=107220548]
+transform = Transform3D(0.32894903, 0.647315, -0.68758696, -0.58458817, 0.7114093, 0.39006874, 0.741653, 0.27364242, 0.6124301, 0, 14.653885, 3.4653811)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1024398161]
+transform = Transform3D(1, 0, 0, 0, 0.6626854, 0.7488979, 0, -0.7488979, 0.6626854, 0, 5.125562, 7.753232)

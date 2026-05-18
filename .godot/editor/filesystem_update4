@@ -1,0 +1,5 @@
+res://objects/proto_player.tscn
+res://scripts/label_username.gd
+res://objects/bullet.tscn
+res://addons/tube/inspector/theme.tres
+res://scripts/bullet.gd
